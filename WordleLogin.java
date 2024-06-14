@@ -48,8 +48,4 @@ public class WordleLogin implements ActionListener {
         }
     }
 
-    public static void main(String[] args) {
-        new WordleLogin();
-    }
-
 }
