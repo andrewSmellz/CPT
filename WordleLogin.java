@@ -34,18 +34,18 @@ public class WordleLogin implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         String username = usernameField.getText().trim();
-        if(e.getSource()==loginButton){
-        if (!username.isEmpty()) {
-            Player.setUsername(username); // Set username in UserSettings
-            frame.dispose(); // Close login window
-            new WordleGUI(); // Open main GUI with username
-            System.out.println(username);
-        } else {
-            JOptionPane.showMessageDialog(frame, "Please enter a username.");
+        if (e.getSource() == loginButton) {
+            if (!username.isEmpty()) {
+                Player.setUsername(username); // Set username in UserSettings
+                frame.dispose(); // Close login window
+                new WordleGUI(); // Open main GUI with username
+                System.out.println(username);
+            } else {
+                JOptionPane.showMessageDialog(frame, "Please enter a username.");
+            }
+        } else if (e.getSource() == quitButton) {
+            frame.dispose();
         }
-    }else if(e.getSource()==quitButton){
-        frame.dispose();
-    }
     }
 
     public static void main(String[] args) {

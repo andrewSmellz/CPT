@@ -110,19 +110,19 @@ public class WordleGUI extends Player implements ActionListener {
         } else if (i == 26) { // ENTER
           if (guess.length() == 5) {
             guessNum++;
-            if (game.checkCorrect(guess, secretWord, (guessNum) )) {
+            if (game.checkCorrect(guess, secretWord, (guessNum))) {
 
               for (int q = 0; q < buttons.length; q++) {
                 buttons[q].setEnabled(false);
               }
-              for (int q = 5 * (guessNum-1); q < 5 * (guessNum-1) + 5; q++) {
+              for (int q = 5 * (guessNum - 1); q < 5 * (guessNum - 1) + 5; q++) {
                 lettersLabels[q].setBackground(new Color(red1, green1, blue1));
               }
               for (int j = 0; j < 5; j++) {
                 buttons[numsPressed.get(j)].setBackground(new Color(red1, green1, blue1));
               }
 
-              String message = "You won, it took you " + guessNum 
+              String message = "You won, it took you " + guessNum
                   + " attempts. \nwould you like to play again or log out";
 
               Object[] options = { "play again", "log out" };
@@ -144,26 +144,28 @@ public class WordleGUI extends Player implements ActionListener {
               }
 
             } else {
-              System.out.println("went into else block");
               for (int j = 0; j < 5; j++) {
                 char letter = guess.toLowerCase().charAt(j);
                 int pos = game.checkCharIndexGreen(letter, secretWord, j);
                 if (pos != -1) {
-                  lettersLabels[5 * (guessNum-1) + j].setBackground(new Color(red1, green1, blue1));
+                  lettersLabels[5 * (guessNum - 1) + j].setBackground(new Color(red1, green1, blue1));
                   buttons[numsPressed.get(j)].setBackground(new Color(red1, green1, blue1));
                 } else {
-                  if (game.checkCharIndexYellow(letter, secretWord)) {
-                    lettersLabels[5 * (guessNum-1) + j].setBackground(new Color(red2, green2, blue2));
+                  if (game.checkCharIndexYellow(letter, secretWord, guess)) {
+                    lettersLabels[5 * (guessNum - 1) + j].setBackground(new Color(red2, green2, blue2));
                     buttons[numsPressed.get(j)].setBackground(new Color(red2, green2, blue2));
                   } else {
-                    lettersLabels[5 * (guessNum-1) + j].setBackground(new Color(red3, green3, blue3));
-                    buttons[numsPressed.get(j)].setBackground(new Color(red3, green3, blue3));
-                    buttons[numsPressed.get(j)].setEnabled(false);
+                    if (lettersLabels[5 * (guessNum - 1) + j].getBackground().equals(new Color(red1, green1, blue1))) {
+                      break;
+                    } else {
+                      lettersLabels[5 * (guessNum - 1) + j].setBackground(new Color(red3, green3, blue3));
+                      buttons[numsPressed.get(j)].setBackground(new Color(red3, green3, blue3));
+                    }
                   }
                 }
               }
             }
-            
+
             guess = "";
             numsPressed.clear();
           } else {

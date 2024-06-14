@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class Player  {
+public class Player {
     public static int red1 = 37;
     public static int green1 = 184;
     public static int blue1 = 37;
@@ -116,16 +116,16 @@ public class Player  {
 
             in.close();
             readFile.close();
-            red1=colours.get(0);
-            green1=colours.get(1);
-            blue1=colours.get(2);
-            red2=colours.get(3);
-            green2=colours.get(4);
-            blue2=colours.get(5);
-            red3=colours.get(6);
-            green3=colours.get(7);
-            blue3=colours.get(8);
-            
+            red1 = colours.get(0);
+            green1 = colours.get(1);
+            blue1 = colours.get(2);
+            red2 = colours.get(3);
+            green2 = colours.get(4);
+            blue2 = colours.get(5);
+            red3 = colours.get(6);
+            green3 = colours.get(7);
+            blue3 = colours.get(8);
+
             // catch exceptions
         } catch (FileNotFoundException e) {
             System.out.println("File does not exist or could not be found");

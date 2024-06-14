@@ -36,7 +36,7 @@ class wordleGame {
         in2 = new FileReader(completedWords);
         readFile2 = new BufferedReader(in2);
         while ((word = readFile2.readLine()) != null) {// read each line of text until there are no more
-          CompletedWordList.add(word.substring(0,6).trim());
+          CompletedWordList.add(word.substring(0, 6).trim());
         }
         System.out.println(CompletedWordList);
         in2.close();
@@ -55,19 +55,19 @@ class wordleGame {
       System.err.println("IOException: " + e.getMessage());
     }
     if (completedWords.exists()) {
-      do{
-      Playword = wordList.get(r.nextInt(wordList.size()));
-      }while(CompletedWordList.contains(Playword));
-    }else{
+      do {
+        Playword = wordList.get(r.nextInt(wordList.size()));
+      } while (CompletedWordList.contains(Playword));
+    } else {
       Playword = wordList.get(r.nextInt(wordList.size()));
     }
     return Playword;
   }
 
-  public boolean checkCorrect(String guess, String secretWord,int attempts) {
+  public boolean checkCorrect(String guess, String secretWord, int attempts) {
     if (guess.toLowerCase().equals(secretWord.trim())) {
       System.out.println("you win");
-      player.writeToFile(secretWord.trim(),attempts);
+      player.writeToFile(secretWord.trim(), attempts);
       return true;
     } else {
       System.out.println("guess does not match secretWord");
@@ -83,8 +83,18 @@ class wordleGame {
     }
   }
 
-  public boolean checkCharIndexYellow(char guess, String secretWord) {
-    if (secretWord.indexOf(guess) != -1) {
+  public boolean checkCharIndexYellow(char guessChar, String secretWord,String guess) {
+    int occurences=0;
+    char[] secretWordLetters = secretWord.toCharArray();
+    for(char i:secretWordLetters){
+      if(i==guessChar){
+        occurences++;
+      }
+    }
+    if(occurences==1){
+      return false;
+    }
+    if (secretWord.indexOf(guessChar) != -1) {
       return true;
     } else {
       return false;
