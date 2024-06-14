@@ -3,7 +3,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 
-public class WordleGUI extends ColourManager implements ActionListener {
+public class WordleGUI extends Player implements ActionListener {
   wordleGame game;
   JFrame frame;
   JPanel panel1;

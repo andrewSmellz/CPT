@@ -2,21 +2,26 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class SettingsGUI extends ColourManager implements ActionListener {
+public class SettingsGUI extends Player implements ActionListener {
+    Player player;
     JFrame frame;
     JPanel panel;
     JLabel[] labels;
     JComboBox<String>[] comboBoxs;
     JButton saveBTN;
+    JButton loadColoursBTN;
 
     
     public SettingsGUI() {
+        player = new Player();
         frame = new JFrame("settings");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         panel = new JPanel();
         panel.setLayout(new GridLayout(5, 2, 10, 5));
         saveBTN= new JButton("save");
         saveBTN.addActionListener(this);
+        loadColoursBTN= new JButton("load colours from save");
+        loadColoursBTN.addActionListener(this);
         labels = new JLabel[3];
         comboBoxs = new JComboBox[3];
 
@@ -32,6 +37,7 @@ public class SettingsGUI extends ColourManager implements ActionListener {
             panel.add(comboBoxs[i]);
         }
         panel.add(saveBTN);
+        panel.add(loadColoursBTN);
         frame.setContentPane(panel);
         frame.setSize(400, 300);
         frame.setLocationRelativeTo(null);
@@ -81,7 +87,10 @@ public class SettingsGUI extends ColourManager implements ActionListener {
                 }
             }
         }if(e.getSource()==saveBTN){
+            player.writeColours();
             frame.dispose();
+        }else if(e.getSource()==loadColoursBTN){
+            readColours();
         }
     }
 }
