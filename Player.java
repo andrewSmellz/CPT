@@ -1,6 +1,6 @@
 import java.io.*;
 import java.util.Calendar;
-public class Player {
+public class Player extends ColourManager{
     private static String  username;
     private String fileName;
     Calendar calendar;
@@ -44,4 +44,8 @@ public class Player {
         Player.username = username;
     }
 
+    public static void writeColours(){
+        
+
+    }
 }
