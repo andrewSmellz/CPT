@@ -1,9 +1,12 @@
+//Player class to handle information about the player
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Calendar;
 
 public class Player {
-    public static int red1 = 37;
+    // declare variables
+    int red1 = 37;
     public static int green1 = 184;
     public static int blue1 = 37;
     public static int red2 = 227;
@@ -12,25 +15,37 @@ public class Player {
     public static int red3 = 143;
     public static int green3 = 142;
     public static int blue3 = 139;
-    private static String username;
-    private String fileName;
+    public static String username;
+    String fileName;
     Calendar calendar;
 
+    /**
+     * constructor
+     * pre: none
+     * post: A Player object created. all objects and variables initialized
+     */
     public Player() {
         calendar = Calendar.getInstance();
         fileName = "";
     }
 
+    /**
+     * method to write a completed word to the players file
+     * pre:completed word and attempts taken are input
+     * post:competion of word with stats is written to file
+     */
     public void writeToFile(String content, int attempts) {
-        fileName = username.toLowerCase() + ".txt";
+        fileName = username.toLowerCase() + ".txt";// name the file as the username.txt
         File textFile = new File(fileName);
         FileWriter out;
         BufferedWriter writeFile;
+        // check if a file for the user already exists, if not create one
         try {
             if (!textFile.exists()) {
                 textFile.createNewFile();
             }
-
+            // contents writen to file are
+            // word completed - date and time completed - attempts taken
             out = new FileWriter(fileName, true);
             writeFile = new BufferedWriter(out);
             writeFile.write(content + " - date completed: " + calendar.getTime() + " - attempts: " + attempts);
@@ -48,24 +63,39 @@ public class Player {
         }
     }
 
+    /**
+     * method to get username
+     * pre:none
+     * post:username is returned
+     */
     public static String getUsername() {
         return username;
     }
 
-    public static void setUsername(String username) {
-        Player.username = username;
+    /**
+     * method to set username
+     * pre:username is input
+     * post:username is set
+     */
+    public static void setUsername(String usernameIn) {
+        Player.username = usernameIn;
     }
 
+    /**
+     * method to write a users selected colour options to their colour file
+     * pre:none
+     * post:username is returned
+     */
     public void writeColours() {
-        fileName = username.toLowerCase() + "_Colour.txt";
+        fileName = username.toLowerCase() + "_Colour.txt";// file name is username_Colour.txt
         File textFile = new File(fileName);
         FileWriter out = null;
         BufferedWriter writeFile = null;
-        try {
+        try {// check if a file already exists for the user, if not, create one
             if (!textFile.exists()) {
                 textFile.createNewFile();
             }
-
+            // all colour settings are written to the file
             out = new FileWriter(fileName);
             writeFile = new BufferedWriter(out);
             writeFile.write(String.valueOf(red1));
@@ -99,23 +129,29 @@ public class Player {
         }
     }
 
+    /**
+     * method to get read colour settings from a users colour file
+     * pre:none
+     * post:users colour settings are read and set
+     */
     public void readColours() {
         FileReader in;
         BufferedReader readFile;
-        fileName = username.toLowerCase() + "_Colour.txt";
+        fileName = username.toLowerCase() + "_Colour.txt";// file name is username_Colour.txt
         File textFile = new File(fileName);
         String word;
+        ArrayList<Integer> colours = new ArrayList<Integer>();
 
         try {
-            ArrayList<Integer> colours = new ArrayList<Integer>();
             in = new FileReader(textFile);
             readFile = new BufferedReader(in);
             while ((word = readFile.readLine()) != null) {// read each line of text until there are no more
-                colours.add(Integer.valueOf(word));
+                colours.add(Integer.valueOf(word));// add each colour value to an arraylist
             }
 
             in.close();
             readFile.close();
+            // set all colour values
             red1 = colours.get(0);
             green1 = colours.get(1);
             blue1 = colours.get(2);

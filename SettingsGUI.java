@@ -1,9 +1,11 @@
+
+//settingsGUI.java class to impliment functionality for the settings GUI
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
 public class SettingsGUI extends Player implements ActionListener {
-    Player player;
+    // declare variables and objects
     JFrame frame;
     JPanel panel;
     JLabel[] labels;
@@ -11,8 +13,13 @@ public class SettingsGUI extends Player implements ActionListener {
     JButton saveBTN;
     JButton loadColoursBTN;
 
+    /**
+     * constructor
+     * pre: none
+     * post: A settingsGUI object created. all objects and variables initialized
+     */
     public SettingsGUI() {
-        player = new Player();
+        // create buttons,labels,combo boxes, panel, and frame
         frame = new JFrame("settings");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         panel = new JPanel();
@@ -35,21 +42,27 @@ public class SettingsGUI extends Player implements ActionListener {
             panel.add(labels[i]);
             panel.add(comboBoxs[i]);
         }
+        // add all components to the panel and frame
         panel.add(saveBTN);
         panel.add(loadColoursBTN);
         frame.setContentPane(panel);
         frame.setSize(400, 300);
-        frame.setLocationRelativeTo(null);
+        frame.setLocationRelativeTo(null);// place GUI in center of screen
         frame.setVisible(true);
     }
 
+    /**
+     * event handler to handle button clicks
+     * pre:none
+     * post:all actions from buttons being clicked have been performed
+     */
     public void actionPerformed(ActionEvent e) {
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 3; i++) {// loop through combo boxes
             if (e.getSource() == comboBoxs[i]) {
-                String selectedColor = (String) comboBoxs[i].getSelectedItem();
+                String selectedColor = (String) comboBoxs[i].getSelectedItem();// get the current selected colour in the combo box
 
-                switch (i) {
-                    case 0:
+                switch (i) {// switch case for different combo boxes and colour options
+                    case 0:// first combo box for colour when a letter is in the correct placement
                         if (selectedColor.equals("green")) {
                             red1 = 37;
                             green1 = 184;
@@ -60,7 +73,7 @@ public class SettingsGUI extends Player implements ActionListener {
                             blue1 = 242;
                         }
                         break;
-                    case 1:
+                    case 1:// second combo box for colour when a letter is in the word but incorrect placement
                         if (selectedColor.equals("yellow")) {
                             red2 = 227;
                             green2 = 213;
@@ -72,7 +85,7 @@ public class SettingsGUI extends Player implements ActionListener {
                         }
 
                         break;
-                    case 2:
+                    case 2:// third combo box for colour when a letter is not in the word
                         if (selectedColor.equals("gray")) {
                             red3 = 143;
                             green3 = 142;
@@ -86,11 +99,12 @@ public class SettingsGUI extends Player implements ActionListener {
                 }
             }
         }
-        if (e.getSource() == saveBTN) {
-            player.writeColours();
-            frame.dispose();
-        } else if (e.getSource() == loadColoursBTN) {
-            readColours();
+        if (e.getSource() == saveBTN) {// if save button is pressed
+            writeColours();// call writeColours method from player class
+            frame.dispose();// close the frame
+
+        } else if (e.getSource() == loadColoursBTN) {// if load colours button is pressed
+            readColours();// readColours method from Player class is called
         }
     }
 }
